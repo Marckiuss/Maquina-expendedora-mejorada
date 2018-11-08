@@ -14,6 +14,11 @@ public class MaquinaExpendedoraMejorada {
     private int dineroVaciado;
     // Permite la opción dentro del constructor de crear una máquina expendedora con premio
     private boolean maquinaConPremio;
+    // Crea un contador de billetes impresos
+    private int contador;
+    // Ofrece la posibilidad de establecer un número máximo de billetes a imprimir
+    private int contadorMaximo;
+    
         
 
     /**
@@ -21,13 +26,14 @@ public class MaquinaExpendedoraMejorada {
      * precio del billete y el origen y destino dados. Se asume que el precio
      * del billete que se recibe es mayor que 0.
      */
-    public MaquinaExpendedoraMejorada(int precioDelBillete, String origen, String destino, boolean maquinaPremiada) {
+    public MaquinaExpendedoraMejorada(int precioDelBillete, String origen, String destino, boolean maquinaPremiada, int contadorMax) {
         precioBillete = precioDelBillete;
         balanceClienteActual = 0;
         totalDineroAcumulado = 0;
         estacionOrigen = origen;
         estacionDestino = destino;
         maquinaConPremio = maquinaPremiada;
+        contadorMaximo = contadorMax;
     }
 
     /**
@@ -60,8 +66,12 @@ public class MaquinaExpendedoraMejorada {
      * Imprime un billete para el cliente actual
      */
     public void imprimirBillete() {
-        if(balanceClienteActual >= precioBillete) {        
+        if(contador == contadorMaximo){
+            System.out.println("Ha alcanzado usted el número máximo de billetes que puede imprimir. Por favor, retire su dinero");
+        }
+        else if(balanceClienteActual >= precioBillete) {        
             // Simula la impresion de un billete
+            contador = contador + 1;
             System.out.println("##################");
             System.out.println("# Billete de tren:");
             System.out.println("# De " + estacionOrigen + " a " + estacionDestino);
